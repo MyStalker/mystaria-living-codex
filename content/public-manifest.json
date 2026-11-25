@@ -24,7 +24,7 @@
     "economy": "Economy and Industry",
     "bestiary": "Bestiary",
     "library": "Reference Library",
-    "development": "Development and Experimental Rules"
+    "development": "At your table"
   },
   "denyHeading": "(?i)(GM.only|DM.only|GM secret|DM secret|forbidden|heresies|heresy|buried verdict|unlived mercy|crimson invitation|campaign|Slate|Lillia|Meridian|Tala Sixwake|Next Three Scenes|private|personal data|research handoff|source maintenance|repository maintenance|continuity rules|Elder Star.*vigil|hidden.*possession|hidden.*parasite)",
   "denyParagraph": "(?i)(Lillia|Tala Sixwake|Meridian.{0,30}(vault|loot)|campaigns?/slate|campaign/characters|hidden Hex.parasite|Hex.parasite possession|demons originate in secondary mutation|hidden.{0,40}possession|parasite.{0,40}possession|Elder Starspawn.{0,100}(Undercoil|mission))",
@@ -823,6 +823,331 @@
       ],
       "exclude": [],
       "status": "experimental"
+    },
+    {
+      "id": "player-character",
+      "repository": "canon",
+      "path": "public/players/character.md",
+      "section": "character",
+      "title": "Build a character",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-training",
+      "repository": "canon",
+      "path": "public/players/training.md",
+      "section": "character",
+      "title": "Attributes, SP, and Training Points",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-health",
+      "repository": "canon",
+      "path": "public/players/health.md",
+      "section": "combat",
+      "title": "Health, defense, and recovery",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-equipment",
+      "repository": "canon",
+      "path": "public/players/equipment.md",
+      "section": "combat",
+      "title": "Weapons, armor, and shields",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-enchantments",
+      "repository": "canon",
+      "path": "public/players/enchantments.md",
+      "section": "combat",
+      "title": "How enchantments work",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-combat",
+      "repository": "canon",
+      "path": "public/players/combat.md",
+      "section": "combat",
+      "title": "Combat at the table",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-conditions",
+      "repository": "canon",
+      "path": "public/players/conditions.md",
+      "section": "combat",
+      "title": "Conditions and counterplay",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-magic",
+      "repository": "canon",
+      "path": "public/players/magic.md",
+      "section": "magic",
+      "title": "Magic: your first working",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-races",
+      "repository": "canon",
+      "path": "public/players/races.md",
+      "section": "peoples",
+      "title": "The races of Mystaria",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-regions",
+      "repository": "canon",
+      "path": "public/players/regions.md",
+      "section": "world",
+      "title": "A traveler’s introduction to Mystaria",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-society",
+      "repository": "canon",
+      "path": "public/players/society.md",
+      "section": "peoples",
+      "title": "Society and daily life",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-creatures",
+      "repository": "canon",
+      "path": "public/players/creatures.md",
+      "section": "bestiary",
+      "title": "Creatures and Starspawn",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-economies",
+      "repository": "canon",
+      "path": "public/players/economies.md",
+      "section": "economy",
+      "title": "Scarlands and Canopy: economic strengths",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-mana-economy",
+      "repository": "canon",
+      "path": "public/players/mana-economy.md",
+      "section": "economy",
+      "title": "Mana generation and waste",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-food",
+      "repository": "canon",
+      "path": "public/players/food.md",
+      "section": "economy",
+      "title": "Food and farming",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-trade",
+      "repository": "canon",
+      "path": "public/players/trade.md",
+      "section": "economy",
+      "title": "Work, money, and trade",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-disciplines",
+      "repository": "canon",
+      "path": "public/players/disciplines.md",
+      "section": "magic",
+      "title": "Find a magical discipline",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-sorcery",
+      "repository": "canon",
+      "path": "public/players/sorcery.md",
+      "section": "magic",
+      "title": "Sorcery: Incantations and alterations",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-manacraft",
+      "repository": "canon",
+      "path": "public/players/manacraft.md",
+      "section": "magic",
+      "title": "Warlocks and Manacraft",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-wakecraft",
+      "repository": "canon",
+      "path": "public/players/wakecraft.md",
+      "section": "magic",
+      "title": "Wakecraft: the living tide",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-psycraft",
+      "repository": "canon",
+      "path": "public/players/psycraft.md",
+      "section": "magic",
+      "title": "Psycraft: the three coils",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-sanguine-arts",
+      "repository": "canon",
+      "path": "public/players/sanguine-arts.md",
+      "section": "magic",
+      "title": "The Sanguine Arts",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-jestercraft",
+      "repository": "canon",
+      "path": "public/players/jestercraft.md",
+      "section": "magic",
+      "title": "Jestercraft and living Regalia",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-anvilcant",
+      "repository": "canon",
+      "path": "public/players/anvilcant.md",
+      "section": "magic",
+      "title": "Anvilcant and clockwork",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
+    },
+    {
+      "id": "player-materials",
+      "repository": "canon",
+      "path": "public/players/materials.md",
+      "section": "combat",
+      "title": "Materials at a glance",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference",
+      "readingOnly": true
     }
   ],
   "aliases": {

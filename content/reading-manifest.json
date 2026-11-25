@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "rules": "HP/d20 with Training Points",
+  "authorApproval": "2026-11-25: Teach HP/d20 + TP as the current game, without a playtest label.",
+  "lessons": [
+    {
+      "id": "character",
+      "url": "/learn/character/",
+      "title": "Build a character",
+      "section": "character",
+      "summary": "Start with a concept, then choose attributes, training, abilities, and gear.",
+      "sources": [
+        "world",
+        "races",
+        "combat",
+        "equipment"
+      ],
+      "document": "player-character"
+    },
+    {
+      "id": "training",
+      "url": "/learn/training/",
+      "title": "Attributes, SP, and Training Points",
+      "section": "character",
+      "summary": "Understand your three budgets and turn them into a useful build.",
+      "sources": [
+        "world",
+        "combat",
+        "crafts"
+      ],
+      "document": "player-training"
+    },
+    {
+      "id": "health",
+      "url": "/learn/health/",
+      "title": "Health, defense, and recovery",
+      "section": "combat",
+      "summary": "Natural HP, health training, armor, Shimmer Reserve, and rest.",
+      "sources": [
+        "combat"
+      ],
+      "document": "player-health"
+    },
+    {
+      "id": "equipment",
+      "url": "/learn/equipment/",
+      "title": "Weapons, armor, and shields",
+      "section": "combat",
+      "summary": "Read a profile and choose a legal, purposeful loadout.",
+      "sources": [
+        "combat",
+        "equipment",
+        "shields",
+        "enchantments"
+      ],
+      "document": "player-equipment"
+    },
+    {
+      "id": "enchantments",
+      "url": "/learn/enchantments/",
+      "title": "How enchantments work",
+      "section": "combat",
+      "summary": "Blank, Mixed, Full, Soul Strain, Leywells, and activation.",
+      "sources": [
+        "equipment",
+        "enchantments",
+        "gem-prices"
+      ],
+      "document": "player-enchantments"
+    },
+    {
+      "id": "combat",
+      "url": "/learn/combat/",
+      "title": "Combat at the table",
+      "section": "combat",
+      "summary": "Two actions, one attack, positioning, Pressure, and prepared defense.",
+      "sources": [
+        "combat",
+        "magic-foundations"
+      ],
+      "document": "player-combat"
+    },
+    {
+      "id": "conditions",
+      "url": "/learn/conditions/",
+      "title": "Conditions and counterplay",
+      "section": "combat",
+      "summary": "Buildup, Burning, Binding, Freeze, and helping an ally.",
+      "sources": [
+        "combat",
+        "magic-foundations"
+      ],
+      "document": "player-conditions"
+    },
+    {
+      "id": "magic",
+      "url": "/learn/magic/",
+      "title": "Magic: your first working",
+      "section": "magic",
+      "summary": "Colors, knowledge, mana, channels, and real media.",
+      "sources": [
+        "sorcery",
+        "warlock",
+        "magic-foundations",
+        "world"
+      ],
+      "document": "player-magic"
+    },
+    {
+      "id": "races",
+      "url": "/world/races/",
+      "title": "The races of Mystaria",
+      "section": "peoples",
+      "summary": "Find a body, heritage, and magical tradition for your character.",
+      "sources": [
+        "races",
+        "smithcraft",
+        "drakyn",
+        "leshy",
+        "nymbrin"
+      ],
+      "document": "player-races"
+    },
+    {
+      "id": "regions",
+      "url": "/world/regions/",
+      "title": "A traveler’s introduction to Mystaria",
+      "section": "world",
+      "summary": "The Canopy, Imperium, Scarlands, and the world a Hero enters.",
+      "sources": [
+        "world",
+        "canopy-economy",
+        "gilded-coil",
+        "worldcoil"
+      ],
+      "document": "player-regions"
+    },
+    {
+      "id": "society",
+      "url": "/world/society/",
+      "title": "Society and daily life",
+      "section": "peoples",
+      "summary": "Citizenship, power, faith, clothing, names, and speech.",
+      "sources": [
+        "world",
+        "canopy-economy",
+        "races",
+        "languages",
+        "names"
+      ],
+      "document": "player-society"
+    },
+    {
+      "id": "creatures",
+      "url": "/world/creatures/",
+      "title": "Creatures and Starspawn",
+      "section": "bestiary",
+      "summary": "Recall, familiar relationships, Mossbacks, and life beside magical beings.",
+      "sources": [
+        "world",
+        "crafts",
+        "drakyn"
+      ],
+      "document": "player-creatures"
+    },
+    {
+      "id": "economies",
+      "url": "/economy/regions/",
+      "title": "Scarlands and Canopy: economic strengths",
+      "section": "economy",
+      "summary": "A side-by-side sheet for resources, industry, energy, trade, and constraints.",
+      "sources": [
+        "canopy-economy",
+        "nymbrin",
+        "national-economies",
+        "leshy"
+      ],
+      "document": "player-economies"
+    },
+    {
+      "id": "mana-economy",
+      "url": "/economy/mana/",
+      "title": "Mana generation and waste",
+      "section": "economy",
+      "summary": "Follow usable mana from its sources to collection, recovery, and disposal.",
+      "sources": [
+        "canopy-economy",
+        "nymbrin",
+        "leshy",
+        "smithcraft"
+      ],
+      "document": "player-mana-economy"
+    },
+    {
+      "id": "food",
+      "url": "/economy/food/",
+      "title": "Food and farming",
+      "section": "economy",
+      "summary": "Rosewheat, Emberbeans, Cindercorn, managmins, and industrial agriculture.",
+      "sources": [
+        "world",
+        "canopy-economy",
+        "leshy",
+        "agriculture"
+      ],
+      "document": "player-food"
+    },
+    {
+      "id": "trade",
+      "url": "/economy/trade/",
+      "title": "Work, money, and trade",
+      "section": "economy",
+      "summary": "Wages, House Scrip, Hero Gems, and what freight adds to the bill.",
+      "sources": [
+        "world",
+        "canopy-economy",
+        "equipment",
+        "national-economies"
+      ],
+      "document": "player-trade"
+    },
+    {
+      "id": "disciplines",
+      "url": "/reference/disciplines/",
+      "title": "Find a magical discipline",
+      "section": "magic",
+      "summary": "Compare traditions, access, and the kind of character each supports.",
+      "sources": [
+        "crafts",
+        "mnemonic",
+        "nymbrin",
+        "drakyn",
+        "smithcraft"
+      ],
+      "document": "player-disciplines"
+    },
+    {
+      "id": "sorcery",
+      "url": "/reference/sorcery/",
+      "title": "Sorcery: Incantations and alterations",
+      "section": "magic",
+      "summary": "Learned spoken principles, purchase costs, and the five catalogues.",
+      "sources": [
+        "sorcery"
+      ],
+      "document": "player-sorcery"
+    },
+    {
+      "id": "manacraft",
+      "url": "/reference/manacraft/",
+      "title": "Warlocks and Manacraft",
+      "section": "magic",
+      "summary": "External mana, raw expressions, shaping, and actual sources.",
+      "sources": [
+        "warlock"
+      ],
+      "document": "player-manacraft"
+    },
+    {
+      "id": "wakecraft",
+      "url": "/reference/wakecraft/",
+      "title": "Wakecraft: the living tide",
+      "section": "magic",
+      "summary": "Six Tidekin paths through existing water.",
+      "sources": [
+        "wakecraft",
+        "magic-foundations"
+      ],
+      "document": "player-wakecraft"
+    },
+    {
+      "id": "psycraft",
+      "url": "/reference/psycraft/",
+      "title": "Psycraft: the three coils",
+      "section": "magic",
+      "summary": "Psychokinesis, Telepathy, Divination, and the limits of psychic working.",
+      "sources": [
+        "psycraft",
+        "magic-foundations"
+      ],
+      "document": "player-psycraft"
+    },
+    {
+      "id": "sanguine-arts",
+      "url": "/reference/sanguine-arts/",
+      "title": "The Sanguine Arts",
+      "section": "magic",
+      "summary": "The Vren’s six disciplines, their roles, and a character’s choices.",
+      "sources": [
+        "sanguine"
+      ],
+      "document": "player-sanguine-arts"
+    },
+    {
+      "id": "jestercraft",
+      "url": "/reference/jestercraft/",
+      "title": "Jestercraft and living Regalia",
+      "section": "magic",
+      "summary": "Six trees, physical fabric, Stitches, and a speaking outfit.",
+      "sources": [
+        "jestercraft"
+      ],
+      "document": "player-jestercraft"
+    },
+    {
+      "id": "anvilcant",
+      "url": "/reference/anvilcant/",
+      "title": "Anvilcant and clockwork",
+      "section": "magic",
+      "summary": "Smithwork, material knowledge, machinery, and maintenance.",
+      "sources": [
+        "smithcraft"
+      ],
+      "document": "player-anvilcant"
+    },
+    {
+      "id": "materials",
+      "url": "/reference/materials/",
+      "title": "Materials at a glance",
+      "section": "combat",
+      "summary": "Compare useful properties, drawbacks, and living construction.",
+      "sources": [
+        "smithcraft",
+        "equipment",
+        "nymbrin"
+      ],
+      "document": "player-materials"
+    }
+  ]
+}

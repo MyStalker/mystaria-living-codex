@@ -40,6 +40,9 @@ class PublishingIntegration(unittest.TestCase):
             config=json.loads((root/'content/public-manifest.json').read_text(encoding='utf8'))
             config['documents'].append({'id':'synthetic-publishing-test','repository':'canon','path':'synthetic-public-fixture.md','title':'Synthetic publishing fixture — not canon','section':'development','status':'proposal','include':['.*'],'exclude':[]})
             (root/'content/public-manifest.json').write_text(json.dumps(config),encoding='utf8')
+            reading=json.loads((root/'content/reading-manifest.json').read_text(encoding='utf8'))
+            reading['lessons'].append(dict(id='synthetic-publishing-test',document='synthetic-publishing-test',url='/development/synthetic-publishing-test/',title='Synthetic publishing fixture - not canon',section='development',summary='Explicit isolated test only.',sources=['synthetic-publishing-test'],status='proposal'))
+            (root/'content/reading-manifest.json').write_text(json.dumps(reading),encoding='utf8')
             fixture=b'# Synthetic fixture\n\nSYNTHETIC_PUBLIC_CHANGE_2026\n\n## GM-only\n\nPRIVATE_FIXTURE_SENTINEL\n'
             source=root/'.cache/canon/synthetic-public-fixture.md';source.write_bytes(fixture)
             revisions=json.loads((root/'.cache/revisions.json').read_text(encoding='utf8'))

@@ -16,6 +16,12 @@ The workflow also runs on publishing-configuration changes. It declares a manual
 
 Initial linking, webhooks and the end-to-end reconciliation test must be marked verified in the delivery report before relying on them. Until configured and verified, these are implementation capabilities, not claims of an active service.
 
+## Current player teaching content
+
+HP/d20 and Training Points are the current player-facing default by the author’s November 25 instruction; no playtest label is applied. The 25 selected teaching pages live in `MyStalker/mystaria-codex/public/players/`. Update the owning detailed subject/changelog and affected public guide together when a rule changes. The website ingests those files from latest main, expands explicit source-table selections, and regenerates pages/search/downloads. Guide additions and headings require no local website build or manual deploy. A new guide needs a stable entry in `content/reading-manifest.json` and explicit public-manifest selection.
+
+The canon push workflow includes root Markdown and `public/players/*.md`. Keep history, supersession records, simulation evidence and proposals in the detailed repositories. Deterministic publication does not rewrite a teaching summary semantically when only its owning subject changes: maintaining both is part of approving current canon, now specified in canon AGENTS.
+
 ## Canon updates
 
 1. Publish the author's approved changes in the owning canon/economy reference and appropriate changelog/index, following that repository's workflow.

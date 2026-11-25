@@ -1,3 +1,5 @@
+> Historical 2.0 infrastructure report. The current player teaching pass is documented in [PLAYER-EDITION.md](PLAYER-EDITION.md).
+
 # Living Codex 2.0 — delivery report
 
 November 25, 2026. **Published at the original production URL, with immediate canon publishing and a verified cloud reconciliation path.**
