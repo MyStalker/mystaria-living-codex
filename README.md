@@ -10,7 +10,7 @@ The 25 teaching pages live in [`MyStalker/mystaria-codex/public/players`](https:
 
 `content/reading-manifest.json` defines each guide's stable URL, title, section, source document, and supporting references. `content/public-manifest.json` explicitly includes its source files and applies privacy rules. New headings in an included guide automatically enter rendering and search. New guides require explicit inclusion. Do not publish arbitrary repository directories.
 
-Selected source tables (HP/END bands, sleep recovery, enchantment modes, Sorcery purchases and catalogues) and eligible weapon enchantment entries are ingested at build time. Historical corrections, removed mechanics, proposals, simulation reports, and private campaigns are not the main reading material. Full manuscripts remain on GitHub. Incomplete mechanical decisions stay brief and explicit.
+Selected source tables (HP/END bands, sleep recovery, enchantment modes, Sorcery purchases and catalogues), current Wakecraft/Psycraft/Anvilcant rank tables, and eligible weapon enchantment entries are ingested at build time. Historical corrections, removed mechanics, proposals, simulation reports, and private campaigns are not the main reading material. Full manuscripts remain on GitHub. Incomplete mechanical decisions stay brief and explicit.
 
 ## Build and validate
 

@@ -52,6 +52,15 @@ class PlayerReading(unittest.TestCase):
         self.assertIn('data-label="Scarlands"',text)
         self.assertIn('data-label="Canopy Kingdoms"',text)
 
+    def test_current_rank_choices_are_available_without_old_income_tables(self):
+        wake=self.page('reference/wakecraft')
+        self.assertIn('Pressurehand',wake)
+        self.assertIn('Dewcatcher',wake)
+        self.assertNotIn('Tidekin Hero starting SP',wake)
+        self.assertNotIn('SP acquisition for Tidekin Heroes',wake)
+        self.assertIn('Invisible Grasp',self.page('reference/psycraft'))
+        self.assertIn('True Grain',self.page('reference/anvilcant'))
+
     def test_optional_content_is_escaped_and_has_distinct_ids(self):
         edition=Edition.__new__(Edition)
         text,_=edition.render('Intro\n\n::: detail One\nFirst\n:::\n\n::: detail Two\n<script>alert(1)</script>\n:::')
