@@ -86,7 +86,7 @@ def classify(block,doc):
     if re.search(r'(?i)(HISTORICAL|SUPERSEDED|legacy|earlier.*retained)',title):return 'historical'
     if doc['status']=='proposal':return 'proposal'
     for heading in reversed(block['parents']+[title]):
-        if re.search(r'(?i)(PROPOSED ONLY|NOT CANON YET|UNAPPROVED|\bPROPOSAL\b|NOT YET APPROVED)',heading):return 'proposal'
+        if re.search(r'(?i)(PROPOSED ONLY|NOT CANON YET|UNAPPROVED|\bPROPOSAL\b|NOT YET APPROVED|DESIGN IDEA FOR LATER)',heading):return 'proposal'
         if re.search(r'(?i)(AUTHOR.APPROVED|APPROVED working|APPROVED EXPERIMENTAL)',heading) and (EXPERIMENT.search(family) or doc['status']=='experimental'):return 'experimental'
     if doc['status']=='experimental' or EXPERIMENT.search(family):return 'experimental'
     if doc['status']=='revision':return 'revision'
