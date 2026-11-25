@@ -9,10 +9,17 @@ def main(force=False):
     for key,spec in config['repositories'].items():
         result=json.loads(request('https://api.github.com/repos/'+spec['name']+'/commits/'+spec['branch'],os.environ.get('GITHUB_TOKEN')))
         revisions[key]=result['sha']
+    # Compare with the actual deployed source revisions. A marker alone cannot prove
+    # its resulting build succeeded; stale production must be retried on later runs.
+    try:
+        published=json.loads(request(config['site']['url']+'/build.json'))
+        deployed={k:v['commit'] for k,v in published.get('repositories',{}).items()}
+    except Exception as exc:
+        deployed={}
+        print('Could not verify production provenance ('+type(exc).__name__+'); requesting a validated rebuild.')
+    if deployed==revisions and not force:
+        print('Production already reflects current source heads; no rebuild needed.');return
     path=ROOT/'content/source-revisions.json'
-    prior=json.loads(path.read_text(encoding='utf8')) if path.exists() else {}
-    if prior.get('revisions')==revisions and not force:
-        print('Source heads unchanged; no publishing marker needed.');return
     value={'revisions':revisions,'checkedAt':datetime.now(timezone.utc).isoformat()}
     path.write_text(json.dumps(value,indent=2)+'\n',encoding='utf8')
     print('Updated publishing marker for '+', '.join(k+':'+v[:12] for k,v in revisions.items()))
