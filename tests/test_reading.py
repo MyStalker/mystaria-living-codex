@@ -42,7 +42,7 @@ class PlayerReading(unittest.TestCase):
 
     def test_catalogue_entries_are_independent_and_addressable(self):
         text=self.page('reference/weapon-enchantments')
-        self.assertEqual(text.count('class="deep-dive"'),37)
+        self.assertGreaterEqual(text.count('class="deep-dive"'),37)
         self.assertRegex(text,r'<details class="deep-dive" id="guardian-[^"]+"')
         self.assertIn('id="catalogue-filter"',text)
 

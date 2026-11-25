@@ -90,7 +90,31 @@ class Edition:
         return table
 
     def expand(self, text):
-        return re.sub(r'\{\{table:([a-z-]+)\}\}', lambda m: self.table(m[1]), text)
+        text = re.sub(r'\{\{table:([a-z-]+)\}\}', lambda m: self.table(m[1]), text)
+        def ranks(match):
+            name = match[1]
+            docid, pattern, count = {
+                'wakecraft': ('wakecraft', r'^[1-6]\. (?:Wakeforce|Longwake|Deepdraw|Mirrorwake|Reefcalling|Saltwake) —', 6),
+                'psycraft': ('psycraft', r'^Five Ranks of (?:Psychokinesis|Telepathy|Divination)$', 3),
+                'anvilcant': ('smithcraft', r'^(?:Orewhisper —|Oathsteel — permanent|Thunderforge —|Hearthsong —)', 4),
+            }[name]
+            groups = []
+            for b in self.blocks[docid]:
+                if not re.search(pattern, b['title']):
+                    continue
+                tables = self.tables(b['body'])
+                if not tables:
+                    raise ValueError('Missing current skill table: ' + b['title'])
+                title = re.sub(r'^\d+\. |^Five Ranks of ', '', b['title'])
+                title = re.sub(r'\s*\(canon\)$', '', title, flags=re.I)
+                groups.append('::: detail ' + title + '\n' + tables[0] + '\n:::')
+            if len(groups) != count:
+                raise ValueError('Current rank-tree selection changed: ' + name)
+            return '\n\n'.join(groups)
+        text = re.sub(r'\{\{ranks:([a-z-]+)\}\}', ranks, text)
+        if re.search(r'\{\{(?:table|ranks):', text):
+            raise ValueError('Unresolved public reference expansion')
+        return text
 
     def render(self, text):
         text, equations = protect_math(text)
@@ -153,8 +177,8 @@ class Edition:
         def row(title, text, url, kind):
             return dict(title=plain(title), text=plain(text), summary=plain(text)[:220], url=url, category=self.config['sections'].get(section, section), status=status, kind=kind)
         self.search.append(row(title, body, url, 'entry'))
-        for part in re.split(r'(?=<h2\b|<details class="deep-dive")', body):
-            m = re.match(r'(?:<h2 id="([^"]+)">(.+?)</h2>|<details class="deep-dive" id="([^"]+)"><summary>(.+?)</summary>)', part, re.S)
+        for part in re.split(r'(?=<h[234]\b|<details class="deep-dive")', body):
+            m = re.match(r'(?:<h[234] id="([^"]+)">(.+?)</h[234]>|<details class="deep-dive" id="([^"]+)"><summary>(.+?)</summary>)', part, re.S)
             if m:
                 key, heading = (m[1], m[2]) if m[1] else (m[3], m[4])
                 self.search.append(row(heading, part, url + '#' + key, 'section'))
