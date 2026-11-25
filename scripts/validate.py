@@ -53,7 +53,7 @@ def validate(root,config):
         seen.add(key)
         u=urlsplit(row['url']);target=(root/u.path.lstrip('/')/'index.html').resolve()
         if target not in pages or (u.fragment and unquote(u.fragment) not in pages[target].ids):errors.append('Broken search target '+row['url'])
-        if row['status'] not in ('reference','experimental','proposal','historical','revision','incomplete'):errors.append('Unknown status '+row['status'])
+        if row['status'] not in ('reference','experimental','proposal','historical','revision','incomplete','development'):errors.append('Unknown status '+row['status'])
     build=json.loads((root/'build.json').read_text(encoding='utf8'))
     for key in ('canon','economy'):
         if not re.fullmatch('[0-9a-f]{40}',build['repositories'][key]['commit']):errors.append('Missing source revision '+key)

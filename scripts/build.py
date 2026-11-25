@@ -7,13 +7,13 @@ from urllib.parse import quote,urlsplit,unquote
 from markdown_it import MarkdownIt
 from sources import ROOT,CACHE,retrieve,select,git_hash
 
-LABELS={'reference':'Reference · revisions apply','experimental':'Approved experimental rules','proposal':'Unapproved development proposal','historical':'Historical / superseded','revision':'Under major revision','incomplete':'Incomplete reference'}
+LABELS={'reference':'Reference · revisions apply','experimental':'Approved experimental rules','proposal':'Unapproved development proposal','historical':'Historical / superseded','revision':'Under major revision','incomplete':'Incomplete reference','development':'Development · approval varies'}
 CONFIG=json.loads((ROOT/'content/public-manifest.json').read_text(encoding='utf8'))
 ED=json.loads((ROOT/'content/editorial.json').read_text(encoding='utf8'))
 def esc(s):return html.escape(str(s),quote=True)
 def slug(s):
     s=unicodedata.normalize('NFKD',re.sub(r'[*`\\]','',s)).lower()
-    return re.sub(r'[^a-z0-9_-]+','-',s).strip('-') or 'section'
+    return re.sub(r'-{2,}','-',re.sub(r'[^a-z0-9_-]+','-',s)).strip('-') or 'section'
 def route(doc,development=False):return ('/development/' if development or doc['section']=='development' else '/library/')+doc['id']+'/'
 def badge(status):return '<span class="badge '+esc(status)+'">'+esc(LABELS[status])+'</span>'
 def clean_links(value,doc):
@@ -25,7 +25,10 @@ def clean_links(value,doc):
     if re.search(r'(^|/)(campaigns?|reports/experimental/2026|\.git|secrets?)(/|$)',path,re.I):return '#restricted-reference'
     target=next((d for d in CONFIG['documents'] if d['repository']==doc['repository'] and Path(d['path']).name==Path(path).name),None)
     if target:
-        return route(target)+('#'+slug(v.split('#',1)[1]) if '#' in v else '')
+        if '#' in v:
+            fragment=slug(v.split('#',1)[1])
+            return ANCHOR_ROUTES.get((target['id'],fragment),route(target))+'#'+fragment
+        return route(target)
     if path=='Mystaria_Mana_Emblems_Approved.png':return 'https://raw.githubusercontent.com/MyStalker/mystaria-codex/'+REVISIONS['canon']['commit']+'/'+path
     if '.md' in path:return '#restricted-reference'
     return '#restricted-reference'
@@ -50,7 +53,7 @@ def render(text,doc=None):
     for i,m in enumerate(protected):body=body.replace('MYSTARIAMATHPLACEHOLDER'+str(i)+'END',m)
     return body
 def plain(body):return ' '.join(html.unescape(re.sub('<[^>]+>',' ',body)).split())
-PAGES={};SEARCH=[];REPORT=[]
+PAGES={};SEARCH=[];REPORT=[];SEARCH_KEYS=set();ANCHOR_ROUTES={}
 def cards(items):return '<div class="card-grid">'+''.join('<a class="tile" href="'+esc(url)+'"><span class="kicker">'+esc(kicker)+'</span><h3>'+esc(title)+'</h3><p>'+esc(desc)+'</p></a>' for url,title,desc,kicker in items)+'</div>'
 def shell(url,title,body,section='library',status='reference',hero=False):
     section_name=CONFIG['sections'].get(section,section)
@@ -63,7 +66,10 @@ def shell(url,title,body,section='library',status='reference',hero=False):
     doc='<!doctype html><html lang="en" data-page="'+esc(url.lstrip('/')+'index.html')+'" data-title="'+esc(title)+'" data-root="/"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+esc(title+' — Mystaria lore and tabletop reference with source revisions and status boundaries.')+'"><meta name="theme-color" content="#251b35"><title>'+esc(title)+' · Mystaria</title><link rel="icon" href="/assets/favicon.svg"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/codex.css"><link rel="canonical" href="'+CONFIG['site']['url']+esc(url)+'"><script defer src="/assets/site.js"></script><script defer src="/assets/reader.js"></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-symbol" aria-hidden="true">✧</span><span>MYSTARIA<small>The Living Codex</small></span></a><button class="theme-toggle" data-theme-toggle aria-label="Toggle light and dark reading theme">☾</button><button class="menu-btn" id="mobile-menu" aria-label="Open menu" aria-expanded="false" aria-controls="global-nav side-nav">Menu</button><nav class="nav-links" id="global-nav" aria-label="Main navigation">'+top+'</nav></div></header><div class="layout"><aside id="side-nav" class="sidebar"><h3>Explore the Codex</h3>'+sidebar+'</aside><main class="main-pane" id="main"><article class="paper"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Mystaria</a><span>›</span><a href="/sections/'+section+'/">'+esc(section_name)+'</a><span>›</span><span>'+esc(title)+'</span></nav>'+h+'<div class="badges">'+badge(status)+'<button class="bookmark-toggle" type="button" data-bookmark-toggle>☆ Save this page</button></div>'+body+'</article></main></div><footer class="footer">Mystaria · The Living Codex 2.0 · <a href="/reference/sources/">Source revisions '+REVISIONS['canon']['commit'][:7]+' / '+REVISIONS['economy']['commit'][:7]+'</a> · <a href="/reference/canon-status/">Canon policy</a></footer><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script></body></html>'
     PAGES[url]=doc
 def add_search(title,text,url,section,status,kind='section'):
-    SEARCH.append(dict(title=title,text=plain(text),summary=plain(text)[:240],url=url,category=CONFIG['sections'].get(section,section),status=status,kind=kind))
+    content=plain(text);key=(title,content,status,kind)
+    if key in SEARCH_KEYS:return
+    SEARCH_KEYS.add(key)
+    SEARCH.append(dict(title=title,text=content,summary=content[:240],url=url,category=CONFIG['sections'].get(section,section),status=status,kind=kind))
 def document(doc):
     source=(CACHE/doc['repository']/doc['path']).read_text(encoding='utf8')
     blocks,removed=select(doc,CONFIG,source)
@@ -76,7 +82,8 @@ def document(doc):
         if not items:continue
         url='/history/'+doc['id']+'/' if group=='history' else route(doc,group=='development')
         title=doc['title']+(' — historical passages' if group=='history' else ' — development' if group=='development' and doc['section']!='development' else '')
-        page_status='historical' if group=='history' else ('proposal' if doc['status']=='proposal' else 'experimental') if group=='development' else doc['status'] if doc['status']=='revision' else 'reference'
+        statuses={b['status'] for b in items}
+        page_status='historical' if group=='history' else (next(iter(statuses)) if len(statuses)==1 and statuses<={'proposal','experimental'} else 'development') if group=='development' else doc['status'] if doc['status']=='revision' else 'reference'
         rev=REVISIONS[doc['repository']];resolved=rev.get('resolvedPaths',{}).get(doc['path'],doc['path'])
         source_url='https://github.com/'+rev['repository']+'/blob/'+rev['commit']+'/'+quote(resolved,safe='/')
         body='<p class="info">'+('These are development references. Approval to experiment does not replace operative rules. Individual proposals and unresolved values retain their stated status.' if group=='development' else 'This reference preserves the source’s qualifications, approvals and unresolved decisions. Later explicit approvals govern earlier conflicting passages. Read the revision notes before using a rule.')+'</p>'
@@ -92,7 +99,8 @@ def document(doc):
             if anchors[anchor]>1:anchor+='-'+str(anchors[anchor]-1)
             content=render(b['body'],doc)
             if b['level']<=2:toc.append('<a href="#'+anchor+'">'+esc(b['title'])+'</a>')
-            parts.append('<section id="'+anchor+'" class="reference-section"><h2>'+esc(b['title'])+'</h2>'+badge(b['status'])+content+'</section>')
+            tag='h'+str(max(2,min(6,b['level'])))
+            parts.append('<section id="'+anchor+'" class="reference-section"><'+tag+'>'+esc(b['title'])+'</'+tag+'>'+badge(b['status'])+content+'</section>')
             mdparts+=['## '+b['title'],b['body']]
             add_search(b['title'],content,url+'#'+anchor,doc['section'],b['status'])
         body+='<details class="page-toc"><summary>On this page ('+str(len(items))+' sections)</summary><nav aria-label="On this page">'+''.join(toc)+'</nav></details>'+''.join(parts)+'<p id="restricted-reference" class="small">Some source links refer to excluded private material, unreviewed documents, or passages outside this public excerpt.</p>'
@@ -118,6 +126,11 @@ def reference_cards(section):
 def main(offline=False):
     global REVISIONS,STAGE
     REVISIONS=retrieve(CONFIG,offline)
+    for d in CONFIG['documents']:
+        selected,_=select(d,CONFIG,(CACHE/d['repository']/d['path']).read_text(encoding='utf8'))
+        for b in selected:
+            target='/history/'+d['id']+'/' if b['status']=='historical' else route(d,b['status'] in ('experimental','proposal'))
+            ANCHOR_ROUTES.setdefault((d['id'],slug(b['title'])),target)
     stage_path=Path(tempfile.mkdtemp(prefix='.stage-',dir=ROOT));STAGE=stage_path
     try:
         shutil.copytree(ROOT/'assets',STAGE/'assets')

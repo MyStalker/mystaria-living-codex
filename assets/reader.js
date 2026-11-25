@@ -3,12 +3,12 @@
   const q=document.getElementById('codex-q');
   if(!q)return;
   const section=document.getElementById('codex-section'),status=document.getElementById('codex-status'),count=document.getElementById('codex-count'),results=document.getElementById('codex-results');
-  const labels={reference:'Reference · revisions apply',experimental:'Approved experimental rules',proposal:'Unapproved development proposal',historical:'Historical / superseded',revision:'Under major revision',incomplete:'Incomplete reference'};
+  const labels={reference:'Reference · revisions apply',experimental:'Approved experimental rules',proposal:'Unapproved development proposal',historical:'Historical / superseded',revision:'Under major revision',incomplete:'Incomplete reference',development:'Development · approval varies'};
   const normalize=s=>String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let data=[];
   function search(){
     const tokens=normalize(q.value).trim().split(/\s+/).filter(Boolean);
-    const found=data.filter(x=>(section.value==='all'||x.category===section.value)&&(status.value==='all'||(status.value==='current'?!['experimental','proposal','historical'].includes(x.status):x.status===status.value))).map(x=>{
+    const found=data.filter(x=>(section.value==='all'||x.category===section.value)&&(status.value==='all'||(status.value==='current'?!['experimental','proposal','historical','development'].includes(x.status):x.status===status.value))).map(x=>{
       let score=x.kind==='entry'?1:0;
       const title=normalize(x.title),text=normalize(x.text);
       for(const t of tokens){if(title.includes(t))score+=20;else if(text.includes(t))score+=2;else return null;}
