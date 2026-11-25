@@ -1,5 +1,10 @@
 name: Reconcile canonical sources
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reconcile.yml'
+      - 'content/public-manifest.json'
   schedule:
     - cron: '17 */2 * * *'
   workflow_dispatch:

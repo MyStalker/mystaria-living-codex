@@ -17,4 +17,5 @@ class StaticMath(unittest.TestCase):
         source=r'Before \\[\min\left(100\\%,\frac{a}{b}\right) \\] after'
         text,items=protect(source)
         self.assertEqual(len(items),1);self.assertIn('<mfrac>',items[0])
+        self.assertIn('display="block"',items[0])
         self.assertFalse(text.startswith('Before \\'))

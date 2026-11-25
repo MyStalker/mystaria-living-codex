@@ -6,7 +6,7 @@ def protect(text):
     equations=[]
     def replace(match):
         source=match[0]
-        display='block' if source.startswith(('$$',r'\[')) else 'inline'
+        display='block' if source.startswith('$$') or '[' in source[:3] else 'inline'
         doubled=source.startswith('\\\\')
         width=3 if doubled else 2
         tex=source[width:-width].strip()
