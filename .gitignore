@@ -1,0 +1,12 @@
+.cache/
+dist/
+.stage-*/
+legacy/
+__pycache__/
+*.pyc
+.env*
+node_modules/
+.netlify/
+recovery/
+local-*.json
+
