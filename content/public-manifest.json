@@ -1,0 +1,850 @@
+{
+  "version": 1,
+  "site": {
+    "title": "Mystaria: The Living Codex",
+    "url": "https://resonant-genie-1ee11c.netlify.app",
+    "netlifySiteId": "1c12c5a7-1002-4553-bd67-e1072e8b1081"
+  },
+  "repositories": {
+    "canon": {
+      "name": "MyStalker/mystaria-codex",
+      "branch": "main"
+    },
+    "economy": {
+      "name": "MyStalker/mystaria-economy",
+      "branch": "main"
+    }
+  },
+  "sections": {
+    "world": "World and Lore",
+    "peoples": "Races and Cultures",
+    "character": "Character Creation",
+    "combat": "Combat and Equipment",
+    "magic": "Magic and Disciplines",
+    "economy": "Economy and Industry",
+    "bestiary": "Bestiary",
+    "library": "Reference Library",
+    "development": "Development and Experimental Rules"
+  },
+  "denyHeading": "(?i)(GM.only|DM.only|GM secret|DM secret|forbidden|heresies|heresy|buried verdict|unlived mercy|crimson invitation|campaign|Slate|Lillia|Meridian|Tala Sixwake|Next Three Scenes|private|personal data|research handoff|source maintenance|repository maintenance|continuity rules|Elder Star.*vigil|hidden.*possession|hidden.*parasite)",
+  "denyParagraph": "(?i)(Lillia|Tala Sixwake|Meridian.{0,30}(vault|loot)|campaigns?/slate|campaign/characters|hidden Hex.parasite|Hex.parasite possession|demons originate in secondary mutation|hidden.{0,40}possession|parasite.{0,40}possession|Elder Starspawn.{0,100}(Undercoil|mission))",
+  "documents": [
+    {
+      "repository": "canon",
+      "path": "01_World_and_Shimmer.md",
+      "id": "world",
+      "section": "world",
+      "title": "World, divinity and the Shimmer",
+      "include": [
+        "^1\\. Mystaria",
+        "^2\\. The Serpentari",
+        "^3\\. The Canopy",
+        "^[456]\\. ",
+        "^18\\. Magic",
+        "^21\\. Starspawn",
+        "^22\\. Nightfox",
+        "^23\\. Summoners",
+        "^24\\. Reincarnated",
+        "^Shimmer XP",
+        "^29\\. The Shimmer",
+        "^30\\. Shimmer Core",
+        "^Current mechanical",
+        "^Three powers",
+        "^Scarlands alchemy",
+        "^November (?:2[0-4]|1[358])",
+        "^Shimmer: legacy"
+      ],
+      "exclude": [
+        "Forbidden",
+        "Heres",
+        "Buried Verdict",
+        "Unlived Mercy",
+        "Crimson Invitation"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "02_Races.md",
+      "id": "races",
+      "section": "peoples",
+      "title": "The Races of Mystaria",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "03_Sorcery.md",
+      "id": "sorcery",
+      "section": "magic",
+      "title": "Sorcery and the five colors",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "revision"
+    },
+    {
+      "repository": "canon",
+      "path": "04_Warlock_Manacraft.md",
+      "id": "warlock",
+      "section": "magic",
+      "title": "Warlocks and Manacraft",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "05_Jestercraft.md",
+      "id": "jestercraft",
+      "section": "magic",
+      "title": "Jestercraft and the Living Regalia",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "revision"
+    },
+    {
+      "repository": "canon",
+      "path": "06_Drakyn.md",
+      "id": "drakyn",
+      "section": "peoples",
+      "title": "Drakyn",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "07_Centaurs_and_Smithcraft.md",
+      "id": "smithcraft",
+      "section": "magic",
+      "title": "Centaurs, Anvilcant and materials",
+      "include": [
+        ".*"
+      ],
+      "exclude": [
+        "VII\\. Celestite",
+        "Godslayer",
+        "IX\\. Proposed overhaul"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "08_Other_Crafts.md",
+      "id": "crafts",
+      "section": "magic",
+      "title": "Racial Crafts and specialized magic",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "09_Equipment_and_Economy.md",
+      "id": "equipment",
+      "section": "combat",
+      "title": "Equipment, materials and enchantment economy",
+      "include": [
+        "^November (?:1[0-9]|2[0-4]), 2026",
+        "^Approved Nymbrin",
+        "^Historical five-quality",
+        "^31\\. Surrender"
+      ],
+      "exclude": [
+        "Heres",
+        "Forbidden",
+        "Celestite.*[Ss]ecret"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "12_Languages_and_Linguistic_Customs.md",
+      "id": "languages",
+      "section": "peoples",
+      "title": "Languages and linguistic customs",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "13_Wakecraft_The_Six_Arts_of_the_Living_Tide.md",
+      "id": "wakecraft",
+      "section": "magic",
+      "title": "Wakecraft: the six arts of the Living Tide",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "14_Vren_Sanguine_Arts_Canon.md",
+      "id": "sanguine",
+      "section": "magic",
+      "title": "The Vren Sanguine Arts",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "15_Naga_Psycraft_Canon.md",
+      "id": "psycraft",
+      "section": "magic",
+      "title": "Naga Psycraft",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "17_Imperial_Sports_and_Great_Coil_Circuit.md",
+      "id": "sports",
+      "section": "peoples",
+      "title": "Imperial sports and the Great Coil Circuit",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "18_The_Gilded_Coil_Imperial_Gazetteer.md",
+      "id": "gilded-coil",
+      "section": "world",
+      "title": "The Gilded Coil: Imperial gazetteer",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "19_The_Mnemonic_Arts_and_Echo_Economy.md",
+      "id": "mnemonic",
+      "section": "magic",
+      "title": "Mnemonic Arts and the Echo Economy",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "20_Nymbrin_Wetcraft_and_Hexen_Canon.md",
+      "id": "nymbrin",
+      "section": "peoples",
+      "title": "Nymbrin, Wetcraft and the Haze",
+      "include": [
+        "^Identity",
+        "^Origins:",
+        "^Personality",
+        "^The Golden Lease",
+        "^Pools,",
+        "^Duskpaw alliance",
+        "^Linguistic",
+        "^Wetcraft:",
+        "^Ardor",
+        "^Five intoxicants",
+        "^Pazara",
+        "^Universal balance",
+        "^Preserved boundaries",
+        "^November .*Scarlands disposal economics",
+        "^November .*ambient Haze persistence"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "22_Combat_Endurance_and_Shimmer_Guard.md",
+      "id": "combat",
+      "section": "combat",
+      "title": "Combat, defenses and status effects",
+      "include": [
+        ".*"
+      ],
+      "exclude": [
+        "encounter.*safeguard",
+        "DM safeguard"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "24_Racial_Naming_Conventions_and_Namebook.md",
+      "id": "names",
+      "section": "peoples",
+      "title": "Racial naming conventions and namebook",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "25_Imperial_Collar_Culture_and_Restraints.md",
+      "id": "collars",
+      "section": "peoples",
+      "title": "Imperial collar culture and restraints",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "25_Melee_Weapon_Catalogue_DRAFT.md",
+      "id": "melee",
+      "section": "combat",
+      "title": "Melee weapons: approvals and open design",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "mixed"
+    },
+    {
+      "repository": "canon",
+      "path": "26_Imperial_Fashion_and_Dress.md",
+      "id": "fashion",
+      "section": "peoples",
+      "title": "Imperial fashion and dress",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "27_Kobold_Imperial_Fashion.md",
+      "id": "kobold-fashion",
+      "section": "peoples",
+      "title": "Kobold Imperial fashion",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "27_Ranged_Weapon_Catalogue_DRAFT.md",
+      "id": "ranged",
+      "section": "combat",
+      "title": "Ranged weapons: approvals and open design",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "mixed"
+    },
+    {
+      "repository": "canon",
+      "path": "29_Physical_Shield_Profiles.md",
+      "id": "shields",
+      "section": "combat",
+      "title": "Physical shields",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "29_Tidekin_Imperial_Fashion.md",
+      "id": "tidekin-fashion",
+      "section": "peoples",
+      "title": "Tidekin Imperial fashion",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "30_Moontouched_Imperial_Fashion.md",
+      "id": "moontouched-fashion",
+      "section": "peoples",
+      "title": "Moontouched Imperial fashion",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "31_Bloomkin_Bannerweave_Fashion.md",
+      "id": "bloomkin-fashion",
+      "section": "peoples",
+      "title": "Bloomkin Bannerweave",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "32_Duskpaw_Fashion_and_Lastwear.md",
+      "id": "duskpaw-fashion",
+      "section": "peoples",
+      "title": "Duskpaw fashion and Lastwear",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "33_Kharak_Rexfolk_Culture_and_Command.md",
+      "id": "kharak",
+      "section": "peoples",
+      "title": "Kharak culture and command",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "34_Ancient_Serpentari_Aquatic_Waterways_Canon.md",
+      "id": "worldcoil",
+      "section": "world",
+      "title": "The Worldcoil and ancient Serpentari",
+      "include": [
+        "^Confirmed world facts",
+        "^November .*Finalized",
+        "^Worldcoil",
+        "^Regional",
+        "^November .*freight"
+      ],
+      "exclude": [
+        "Undercoil",
+        "Elder Star",
+        "Campaign",
+        "Slate"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "35_Magical_Media_and_Contests.md",
+      "id": "magic-foundations",
+      "section": "magic",
+      "title": "Magical media, magnitude and contested spellcasting",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "36_Weapon_Enchantments.md",
+      "id": "enchantments",
+      "section": "combat",
+      "title": "Weapon enchantments",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "37_Gem_Price_Catalogue.md",
+      "id": "gem-prices",
+      "section": "economy",
+      "title": "Gem price catalogue",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "38_Leshen_Leshy_Foundations.md",
+      "id": "leshy",
+      "section": "peoples",
+      "title": "Leshen, Leshy and Beanstocks",
+      "include": [
+        ".*"
+      ],
+      "exclude": [
+        "Scarlands Hex disposal.*possession"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "canon",
+      "path": "39_Canopy_Kingdoms_and_Mana_Economy.md",
+      "id": "canopy-economy",
+      "section": "economy",
+      "title": "Canopy Kingdoms and industrial mana economy",
+      "include": [
+        ".*"
+      ],
+      "exclude": [
+        "Scarlands Hex disposal.*possession"
+      ],
+      "status": "reference"
+    },
+    {
+      "repository": "economy",
+      "path": "01_Economic_Principles_and_Labor.md",
+      "id": "labor",
+      "section": "economy",
+      "title": "Economic principles, wages and labor",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "economy",
+      "path": "02_Currencies_and_Banking.md",
+      "id": "banking",
+      "section": "economy",
+      "title": "Currencies and banking",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "economy",
+      "path": "03_Nonhero_Progression.md",
+      "id": "nonhero",
+      "section": "character",
+      "title": "Non-Hero progression",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "economy",
+      "path": "04_Three_National_Economies.md",
+      "id": "national-economies",
+      "section": "economy",
+      "title": "Three national economies",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "reference"
+    },
+    {
+      "repository": "economy",
+      "path": "25_Agricultural_and_Mana_Economy_Working_Benchmarks.md",
+      "id": "agriculture",
+      "section": "economy",
+      "title": "Agriculture, food, machinery and mana benchmarks",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "mixed"
+    },
+    {
+      "repository": "economy",
+      "path": "05_Canopy_Household_Budgets_DRAFT.md",
+      "id": "economy-05",
+      "section": "development",
+      "title": "Canopy Household Budgets",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "06_Canopy_Settlement_and_Food_Demand_DRAFT.md",
+      "id": "economy-06",
+      "section": "development",
+      "title": "Canopy Settlement and Food Demand",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "07_Canopy_Farm_Footprint_DRAFT.md",
+      "id": "economy-07",
+      "section": "development",
+      "title": "Canopy Farm Footprint",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "08_Canopy_Workforce_and_Canopy_Urbanism_DRAFT.md",
+      "id": "economy-08",
+      "section": "development",
+      "title": "Canopy Workforce and Canopy Urbanism",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "09_Equatorial_Treetop_Agriculture_DRAFT.md",
+      "id": "economy-09",
+      "section": "development",
+      "title": "Equatorial Treetop Agriculture",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "10_Treetop_Estate_and_Starspawn_Ranch_DRAFT.md",
+      "id": "economy-10",
+      "section": "development",
+      "title": "Treetop Estate and Starspawn Ranch",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "11_Mossback_Yield_Slaughter_and_Ranch_Throughput_DRAFT.md",
+      "id": "economy-11",
+      "section": "development",
+      "title": "Mossback Yield Slaughter and Ranch Throughput",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "13_Mossback_Growth_Curve_and_Lifetime_Feed_DRAFT.md",
+      "id": "economy-13",
+      "section": "development",
+      "title": "Mossback Growth Curve and Lifetime Feed",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "14_Sunrush_Forage_and_Supplement_Crop_Models_DRAFT.md",
+      "id": "economy-14",
+      "section": "development",
+      "title": "Sunrush Forage and Supplement Crop Models",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "15_Managmin_Nutrition_and_Mossback_Feed_DRAFT.md",
+      "id": "economy-15",
+      "section": "development",
+      "title": "Managmin Nutrition and Mossback Feed",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "16_Sunrush_100ha_Labor_and_Irrigation_Budget_DRAFT.md",
+      "id": "economy-16",
+      "section": "development",
+      "title": "Sunrush 100ha Labor and Irrigation Budget",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "17_Canopy_Wages_and_Sunrush_Farmgate_Pricing_DRAFT.md",
+      "id": "economy-17",
+      "section": "development",
+      "title": "Canopy Wages and Sunrush Farmgate Pricing",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "18_Supplementary_Forage_and_Mossback_Sanctuary_Costs_DRAFT.md",
+      "id": "economy-18",
+      "section": "development",
+      "title": "Supplementary Forage and Mossback Sanctuary Costs",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "19_Enslaved_Sanctuary_Workforce_Meat_Cost_Sensitivity_DRAFT.md",
+      "id": "economy-19",
+      "section": "development",
+      "title": "Enslaved Sanctuary Workforce Meat Cost Sensitivity",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "20_Natural_Grazing_and_Mossback_Feed_Price_Reconciliation_DRAFT.md",
+      "id": "economy-20",
+      "section": "development",
+      "title": "Natural Grazing and Mossback Feed Price Reconciliation",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "21_Mossback_Slaughter_Age_Grazing_Economics_DRAFT.md",
+      "id": "economy-21",
+      "section": "development",
+      "title": "Mossback Slaughter Age Grazing Economics",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "22_Mossback_Dairy_Cheese_and_Pasture_Steak_Costs_DRAFT.md",
+      "id": "economy-22",
+      "section": "development",
+      "title": "Mossback Dairy Cheese and Pasture Steak Costs",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "23_Canopy_Meat_Day_and_Household_Affordability_DRAFT.md",
+      "id": "economy-23",
+      "section": "development",
+      "title": "Canopy Meat Day and Household Affordability",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "economy",
+      "path": "24_Noble_Meat_Day_Subsidy_and_Household_Purchasing_Power_DRAFT.md",
+      "id": "economy-24",
+      "section": "development",
+      "title": "Noble Meat Day Subsidy and Household Purchasing Power",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "proposal"
+    },
+    {
+      "repository": "canon",
+      "path": "reports/experimental/HP_D20_Equipment_Conversion_DRAFT.md",
+      "id": "hp-d20-equipment",
+      "section": "development",
+      "title": "HP/d20 equipment conversion: working research",
+      "include": [
+        ".*"
+      ],
+      "exclude": [],
+      "status": "experimental"
+    }
+  ],
+  "aliases": {
+    "/reference/quick-rules/": "/sections/character/",
+    "/reference/combat/": "/library/combat/",
+    "/reference/magic-foundations/": "/library/magic-foundations/",
+    "/reference/shields/": "/library/shields/",
+    "/reference/armor/": "/library/equipment/",
+    "/reference/weapons/": "/library/melee/",
+    "/reference/enchantments/": "/library/enchantments/",
+    "/reference/anvilcant/": "/library/smithcraft/",
+    "/reference/wakecraft/": "/library/wakecraft/",
+    "/reference/sanguine-arts/": "/library/sanguine/",
+    "/reference/psycraft/": "/library/psycraft/",
+    "/reference/culture/": "/sections/peoples/",
+    "/reference/glossary/": "/reference/search/",
+    "/reference/reading-paths/": "/reference/sources/",
+    "/reference/changelog/": "/reference/sources/",
+    "/reference/history-2026-11-03/": "/reference/canon-status/",
+    "/codex/places/gilded-coil/": "/library/gilded-coil/",
+    "/codex/places/worldcoil/": "/library/worldcoil/",
+    "/codex/places/scarlands/": "/library/canopy-economy/",
+    "/codex/factions/canopy-kingdoms/": "/library/canopy-economy/"
+  }
+}

@@ -1,0 +1,43 @@
+[build]
+  command = "python scripts/build.py"
+  publish = "dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
+
+[context.deploy-preview]
+  command = "python scripts/build.py"
+
+[context.branch-deploy]
+  command = "python scripts/build.py"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https://raw.githubusercontent.com data:; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/build.json"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[redirects]]
+  from = "/content/source/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/content/history/*"
+  to = "/404.html"
+  status = 404
+  force = true
