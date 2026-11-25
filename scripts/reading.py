@@ -120,7 +120,22 @@ class Edition:
             body = body.replace('<p>CODEXDETAIL' + str(i) + 'END</p>', value)
         for i, value in enumerate(equations):
             body = body.replace('MYSTARIAMATHPLACEHOLDER' + str(i) + 'END', value)
-        body = body.replace('<table>', '<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table>').replace('</table>', '</table></div>')
+        def table_layout(match):
+            content = match[1]
+            headers = [plain(x) for x in re.findall(r'<th(?:\s[^>]*)?>(.*?)</th>', content, re.S)]
+            def row_layout(row):
+                column = 0
+                def cell(cell_match):
+                    nonlocal column
+                    label = headers[column] if column < len(headers) else ''
+                    column += 1
+                    return '<td' + cell_match[1] + ' role="cell" data-label="' + esc(label) + '">'
+                return '<tr role="row">' + re.sub(r'<td([^>]*)>', cell, row[1]) + '</tr>'
+            content = re.sub(r'<tr>(.*?)</tr>', row_layout, content, flags=re.S)
+            content = re.sub(r'<th(?=[\s>])', '<th scope="col" role="columnheader"', content)
+            style = ' class="mobile-cards"' if len(headers) > 2 else ''
+            return '<div class="table-scroll" role="region" aria-label="Reference table" tabindex="0"><table role="table"' + style + '>' + content + '</table></div>'
+        body = re.sub(r'<table>(.*?)</table>', table_layout, body, flags=re.S)
         body = body.replace('<p>', '<p class="lesson-lead">', 1)
         return body, toc
 

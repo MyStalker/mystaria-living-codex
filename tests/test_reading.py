@@ -29,7 +29,7 @@ class PlayerReading(unittest.TestCase):
         text=self.page('economy/mana')
         self.assertEqual(text.count('class="deep-dive"'),6)
         for a,b in [('Red','Green'),('Red','Black'),('Blue','Black'),('Blue','White'),('Green','White')]:
-            self.assertRegex(text,r'<td>'+a+r'</td>\s*<td>'+b+r'</td>')
+            self.assertRegex(text,r'<td[^>]*>'+a+r'</td>\s*<td[^>]*>'+b+r'</td>')
         self.assertIn('87.5%',text)
         self.assertIn('Immediate successor',text)
 
@@ -45,6 +45,12 @@ class PlayerReading(unittest.TestCase):
         self.assertEqual(text.count('class="deep-dive"'),37)
         self.assertRegex(text,r'<details class="deep-dive" id="guardian-[^"]+"')
         self.assertIn('id="catalogue-filter"',text)
+
+    def test_comparison_cells_keep_their_mobile_labels(self):
+        text=self.page('economy/regions')
+        self.assertIn('class="mobile-cards"',text)
+        self.assertIn('data-label="Scarlands"',text)
+        self.assertIn('data-label="Canopy Kingdoms"',text)
 
     def test_optional_content_is_escaped_and_has_distinct_ids(self):
         edition=Edition.__new__(Edition)
