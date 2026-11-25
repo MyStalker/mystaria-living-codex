@@ -47,7 +47,7 @@ Public downloads use the same filtered text as the reader. GM/campaign sections,
 | `netlify.toml` | Existing-site build, publish directory, headers and retired raw-source routes. |
 | `.github/workflows/` | Cloud validation and two-hour reconciliation fallback. |
 
-Math preserves readable TeX and uses pinned MathJax 3.2.2 from jsDelivr for presentation. Markdown, tables, links and the rest of the site remain usable without that enhancement. Search is static, browser-local and makes no visitor GitHub requests. Its generated index currently covers approximately 2,000 sections.
+Math is converted at build time to native MathML using pinned latex2mathml 3.78.1; original TeX remains in public Markdown downloads. No visitor math script or font CDN is required. Search is static, browser-local and makes no visitor GitHub requests. Its generated index currently covers approximately 2,000 sections.
 
 ## Publishing and rollback
 

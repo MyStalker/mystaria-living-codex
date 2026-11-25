@@ -8,7 +8,7 @@ Build command: `python scripts/build.py`. Publish directory: `dist`. Python: 3.1
 
 ## Automatic publishing
 
-The intended event path is an upstream GitHub push webhook to a Netlify build hook targeting website `main`. Configure one hook on the existing Netlify project, and use that private hook URL in the webhook settings of each authoritative repository. Subscribe only to push events. The hook is a build trigger and must never be committed, placed in the manifest or shipped to visitors. An upstream webhook may queue a rebuild for an unrelated push; public selection still controls what is published.
+The immediate event path is the `Publish Living Codex` GitHub Action in each authoritative repository. A push of root Markdown on main, or a manual workflow dispatch, posts to the existing Netlify build hook targeting website main. Both repositories store that URL in their encrypted `LIVING_CODEX_BUILD_HOOK` secret. The source workflow needs no GitHub token permissions or checkout. The hook URL must never be committed, placed in the manifest, printed in logs or shipped to visitors.
 
 The website's `Reconcile canonical sources` GitHub Action runs every two hours, at minute 17 UTC. It checks current source heads, updates only `content/source-revisions.json` when they change, and pushes the marker to website main. Netlify's Git integration then builds the site. This fallback does not depend on the author's PC or a personal token. Scheduled workflows can be delayed by GitHub and may be disabled by GitHub after prolonged repository inactivity; check the Actions tab if updates stop.
 
@@ -44,4 +44,4 @@ Add a reviewed manifest document with a unique stable id, repository, source pat
 
 ## Known limits
 
-Append-only source manuscripts can contain unmarked obsolete or contradictory paragraphs. Classification is conservative and does not semantically adjudicate them. Chapter-level revision notices and source qualifications are essential. Formula enhancement depends on a pinned external MathJax distribution; TeX remains readable when unavailable. Large reference pages and the current static search index can be split further if content growth warrants it. Public source links point to selected upstream files, which may themselves contain broader source context outside the website's filtered excerpts.
+Append-only source manuscripts can contain unmarked obsolete or contradictory paragraphs. Classification is conservative and does not semantically adjudicate them. Chapter-level revision notices and source qualifications are essential. Formulas are compiled to native MathML at build time, with original TeX retained in Markdown downloads. Large reference pages and the current static search index can be split further if content growth warrants it. Public source links point to selected upstream files, which may themselves contain broader source context outside the website's filtered excerpts.
