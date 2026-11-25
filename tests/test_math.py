@@ -13,3 +13,8 @@ class StaticMath(unittest.TestCase):
         source='```tex\n\\[x^2\\]\n```\n`\\(a\\)`'
         text,items=protect(source)
         self.assertEqual(text,source);self.assertEqual(items,[])
+    def test_markdown_escaped_delimiters_and_percent(self):
+        source=r'Before \\[\min\left(100\\%,\frac{a}{b}\right) \\] after'
+        text,items=protect(source)
+        self.assertEqual(len(items),1);self.assertIn('<mfrac>',items[0])
+        self.assertFalse(text.startswith('Before \\'))
