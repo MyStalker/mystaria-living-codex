@@ -1,7 +1,17 @@
 {
+  "schemaVersion": 2,
+  "requestId": "4f7ed8bd-cc53-414f-8f86-951074d4344a",
+  "requestedAt": "2026-11-26T03:06:06.611051+00:00",
+  "publicContentSha256": "f87e346349672633c193f0a0ed44130072ad2047e796f5d947867ee4b9cfa1bc",
+  "websiteInputsSha256": "3ab823410e8144d165eeee42413d2510f430a6b8c31e6df41aae662547818eeb",
   "revisions": {
-    "canon": "ec06d2f88b27185ed026b67e482a1dfa35f568e1",
-    "economy": "0f8591d431f412ef6ab495f597540b7c9733c2af"
+    "canon": "1d1151b1ce70666cc0e86d02c86bc64eddcc3be9",
+    "economy": "d5ccdaf56a10b7044aaf2203638c0a9cf22f2e7b"
   },
-  "checkedAt": "2026-11-26T01:32:22.681179+00:00"
+  "requests": [
+    {
+      "id": "4f7ed8bd-cc53-414f-8f86-951074d4344a",
+      "at": "2026-11-26T03:06:06.611051+00:00"
+    }
+  ]
 }
