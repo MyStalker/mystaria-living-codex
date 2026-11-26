@@ -37,6 +37,7 @@ class PublishingIntegration(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='codex-fixture-') as temp:
             root=Path(temp)
             for name in ('scripts','content','assets','.cache'):shutil.copytree(ROOT/name,root/name,ignore=shutil.ignore_patterns('__pycache__'))
+            for name in ('netlify.toml','requirements.txt','requirements.lock'):shutil.copyfile(ROOT/name,root/name)
             config=json.loads((root/'content/public-manifest.json').read_text(encoding='utf8'))
             config['documents'].append({'id':'synthetic-publishing-test','repository':'canon','path':'synthetic-public-fixture.md','title':'Synthetic publishing fixture — not canon','section':'development','status':'proposal','include':['.*'],'exclude':[]})
             (root/'content/public-manifest.json').write_text(json.dumps(config),encoding='utf8')
@@ -55,6 +56,12 @@ class PublishingIntegration(unittest.TestCase):
             index=json.loads((root/'dist/assets/search-index.json').read_text(encoding='utf8'))
             fixture_rows=[x for x in index if 'synthetic-publishing-test' in x['url']]
             self.assertTrue(fixture_rows);self.assertTrue(all(x['status']=='proposal' for x in fixture_rows))
+            first_public_hash=json.loads((root/'dist/build.json').read_text(encoding='utf8'))['publicContentSha256']
+            revisions['canon']['commit']='1'*40
+            (root/'.cache/revisions.json').write_text(json.dumps(revisions),encoding='utf8')
+            provenance_only=subprocess.run([sys.executable,'scripts/build.py','--offline'],cwd=root,capture_output=True,text=True,encoding='utf8')
+            self.assertEqual(provenance_only.returncode,0,provenance_only.stderr[-5000:])
+            self.assertEqual(first_public_hash,json.loads((root/'dist/build.json').read_text(encoding='utf8'))['publicContentSha256'])
             before=hashlib.sha256((root/'dist/build.json').read_bytes()).hexdigest()
             source.write_text('Corrupted source transfer',encoding='utf8')
             failed=subprocess.run([sys.executable,'scripts/build.py','--offline'],cwd=root,capture_output=True,text=True,encoding='utf8')

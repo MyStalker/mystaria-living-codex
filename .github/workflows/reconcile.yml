@@ -1,18 +1,31 @@
-name: Reconcile canonical sources
+name: Queue reviewed Codex release
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/reconcile.yml'
-      - 'content/public-manifest.json'
+      - 'assets/**'
+      - 'content/**'
+      - '!content/source-revisions.json'
+      - 'scripts/**'
+      - 'requirements*'
+      - 'netlify.toml'
   schedule:
-    - cron: '17 */2 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
     inputs:
-      force_rebuild:
-        description: Force a safe reconciliation commit, without changing canon
+      publish_now:
+        description: Publish changed content without waiting six hours (budget still applies)
         type: boolean
         default: false
+      retry:
+        description: Retry an unconfirmed release after inspecting Netlify (budget still applies)
+        type: boolean
+        default: false
+      dry_run:
+        description: Show the decision without requesting production
+        type: boolean
+        default: true
 permissions:
   contents: write
 concurrency:
@@ -21,21 +34,29 @@ concurrency:
 jobs:
   reconcile:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
-      - name: Check source heads
-        run: python scripts/reconcile.py ${{ inputs.force_rebuild && '--force' || '' }}
+          cache: pip
+      - run: python -m pip install -r requirements.lock
+      - name: Build and validate current public content before requesting production
+        run: python scripts/build.py
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Publish reconciliation marker
+      - run: python -m unittest discover -s tests -v
+      - run: node --check assets/site.js && node --check assets/reader.js && node tests/calculators.cjs && node --test tests/deploy_guard.test.cjs
+      - name: Apply public-content comparison, batching and shared budget
+        run: python scripts/reconcile.py ${{ inputs.publish_now && '--publish-now' || '' }} ${{ inputs.retry && '--retry' || '' }} ${{ inputs.dry_run && '--dry-run' || '' }}
+      - name: Commit at most one production request
         run: |
           git add content/source-revisions.json
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'Mystaria Canon Publisher'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Reconcile Living Codex with canonical source heads'
+          git commit -m '[publish-codex] Publish one validated public-content batch'
           git push origin HEAD:main

@@ -9,6 +9,7 @@ import shutil
 import tempfile
 from reading import Edition, esc
 from sources import ROOT, retrieve
+from publication import public_fingerprint, website_fingerprint
 
 
 def build_indexes(site):
@@ -101,10 +102,14 @@ def main(offline=False):
         (stage / 'assets/search-index.json').write_text(json.dumps(site.search, ensure_ascii=False, separators=(',', ':')), encoding='utf8')
         provenance = {k: dict(repository=v['repository'], commit=v['commit']) for k, v in revisions.items()}
         build = dict(version='2.1.0', edition='Player guide', rules=reading['rules'], builtAt=datetime.now(timezone.utc).isoformat(), repositories=provenance, pages=len(site.pages), searchRecords=len(site.search), documents=site.report, websiteCommit=os.environ.get('COMMIT_REF') or os.environ.get('GITHUB_SHA') or 'local', readingManifestSha256=hashlib.sha256((ROOT / 'content/reading-manifest.json').read_bytes()).hexdigest())
-        (stage / 'build.json').write_text(json.dumps(build, ensure_ascii=False, indent=2), encoding='utf8')
         (stage / '404.html').write_text(site.pages['/reference/search/'].replace('<h1>Search the Codex</h1>', '<h1>Page not found — search the Codex</h1>'), encoding='utf8')
         (stage / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + config['site']['url'] + '/sitemap.xml\n', encoding='utf8')
         (stage / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + config['site']['url'] + esc(u) + '</loc></url>' for u in site.pages if u not in site.redirects) + '</urlset>', encoding='utf8')
+        marker = json.loads((ROOT / 'content/source-revisions.json').read_text(encoding='utf8'))
+        build.update(publicationSchema=1, publicationId=marker.get('requestId'),
+                     publicContentSha256=public_fingerprint(stage, revisions),
+                     websiteInputsSha256=website_fingerprint(ROOT))
+        (stage / 'build.json').write_text(json.dumps(build, ensure_ascii=False, indent=2), encoding='utf8')
         from validate import validate
         result = validate(stage, config)
         if result['errors']:

@@ -14,6 +14,8 @@ Selected source tables (HP/END bands, sleep recovery, enchantment modes, Sorcery
 
 ## Build and validate
 
+Production is released through one [budgeted publishing queue](docs/PUBLISHING-SAFEGUARDS.md). Source edits and documentation commits no longer publish individually. The queue checks hourly, compares actual public output, batches automatic releases at least six hours apart, and allows at most 2 requests per 24 hours / 12 per 30 days. Preview and local development do not use this production request budget.
+
 Python 3.12; Node.js for browser utility checks. Exact Python dependencies are pinned in `requirements.lock`.
 
 ```sh

@@ -4,15 +4,15 @@
 
 Keep site `resonant-genie-1ee11c`, Netlify site ID `1c12c5a7-1002-4553-bd67-e1072e8b1081`. Do not create a replacement site. The original known production deployment before modernization is `6b00ec8d59a20d0cae88d22f` (November 20, 2026).
 
-Build command: `python scripts/build.py`. Publish directory: `dist`. Python: 3.12. Public-source ingestion needs no GitHub secret. GitHub Actions uses its ephemeral repository token for API rate limits; this token is not sent to codeload or the browser.
+Local build command: `python scripts/build.py`. Netlify's production command first runs `node scripts/production_guard.cjs --build-check`, then the Python builder. Publish directory: `dist`. Python: 3.12. Public-source ingestion needs no GitHub secret. GitHub Actions uses its ephemeral repository token for API rate limits; this token is not sent to codeload or the browser.
 
 ## Automatic publishing
 
-The immediate event path is the `Publish Living Codex` GitHub Action in each authoritative repository. A push of root Markdown or selected `public/players/*.md` on main, or a manual workflow dispatch, posts to the existing Netlify build hook targeting website main. Both repositories store that URL in their encrypted `LIVING_CODEX_BUILD_HOOK` secret. The source workflow needs no GitHub token permissions or checkout. The hook URL must never be committed, placed in the manifest, printed in logs or shipped to visitors.
+The former per-file Netlify hooks are **retired**. They caused repeated paid production deploys while related canon files were saved separately. Neither authoritative repository should call a Netlify build hook. Old hook secrets are not used; never print or copy them into source.
 
-The website's `Reconcile canonical sources` GitHub Action runs every two hours, at minute 17 UTC. It compares source heads with actual production provenance, updates only `content/source-revisions.json` when a rebuild is needed, and pushes the marker to website main. A failed earlier marker build is retried rather than mistaken for successful publication. Netlify's Git integration then builds the site. This fallback does not depend on the author's PC or a personal token. Scheduled workflows can be delayed by GitHub and may be disabled by GitHub after prolonged repository inactivity; check the Actions tab if updates stop.
+The website's **Queue reviewed Codex release** Action is the single publisher. It checks hourly at minute 17 UTC and after website build-input changes, builds/validates current public sources on GitHub, compares meaningful output with production, and requests at most one release through a durable marker commit. Defaults: six hours between automatic requests, at most 2 requests in 24 hours and 12 in 30 days. Internal docs, timestamps and source-head changes alone do not cause releases. See [Publishing safeguards](PUBLISHING-SAFEGUARDS.md) for exact policy, manual controls and recovery.
 
-The workflow also runs on publishing-configuration changes. It declares a manual **force_rebuild** input; the boolean dispatch UI did not create an observable run during setup, so the configuration-change push verified the cloud worker. A marker commit does not prove deployment: inspect the Netlify deploy result and its `/build.json`. GitHub's own push workflows do not recursively trigger from `GITHUB_TOKEN` commits; the Netlify integration and build validation remain necessary.
+Manual runs default to **dry_run**. **publish_now** bypasses the batching interval, and **retry** explicitly permits a new attempt after an unconfirmed release has been inspected; neither bypasses the shared request budget. Unconfirmed requests stop further automatic publishing instead of creating endless retries. GitHub pushes do not recursively trigger GitHub workflows from `GITHUB_TOKEN`; the existing Netlify Git integration handles release marker commits. GitHub schedules may be delayed or disabled after prolonged inactivity.
 
 Initial linking, webhooks and the end-to-end reconciliation test must be marked verified in the delivery report before relying on them. Until configured and verified, these are implementation capabilities, not claims of an active service.
 
@@ -20,20 +20,20 @@ Initial linking, webhooks and the end-to-end reconciliation test must be marked 
 
 HP/d20 and Training Points are the current player-facing default by the author’s November 25 instruction; no playtest label is applied. The 25 selected teaching pages live in `MyStalker/mystaria-codex/public/players/`. Update the owning detailed subject/changelog and affected public guide together when a rule changes. The website ingests those files from latest main, expands explicit source-table selections, and regenerates pages/search/downloads. Guide additions and headings require no local website build or manual deploy. A new guide needs a stable entry in `content/reading-manifest.json` and explicit public-manifest selection.
 
-The canon push workflow includes root Markdown and `public/players/*.md`. Keep history, supersession records, simulation evidence and proposals in the detailed repositories. Deterministic publication does not rewrite a teaching summary semantically when only its owning subject changes: maintaining both is part of approving current canon, now specified in canon AGENTS.
+Keep history, supersession records, simulation evidence and proposals in the detailed repositories. Save related subject, changelog/index and player-guide changes in one atomic commit when possible. Deterministic publication does not rewrite a teaching summary semantically when only its owning subject changes: maintaining both remains part of approving current canon.
 
 ## Canon updates
 
 1. Publish the author's approved changes in the owning canon/economy reference and appropriate changelog/index, following that repository's workflow.
-2. An event or reconciliation rebuild resolves current heads and captures exact source revisions.
-3. Public selection, rendering and validation run in Netlify. Failures leave the previous production deployment serving.
+2. The shared queue resolves current heads, captures exact revisions, builds and validates public output, then applies batching and request budgets.
+3. An accepted marker triggers the guarded Netlify build. Failures leave the previous production deployment serving; inspect failures before an explicit queue retry.
 4. Inspect source revisions on the website or `/build.json` to confirm incorporation.
 
 Do not promote a Combat Lab result by editing website status rules. Resolve canon ambiguities in the authoritative repository. An ordinary new paragraph in a reviewed public section needs no website edit; a new document or newly private section requires manifest/privacy review. Automated filters are defense in depth, not a substitute for upstream editorial care.
 
 ## Review a substantial website change
 
-Keep the existing production deploy locked against automatic publication while first linking or testing the modernization. Build a Netlify preview/permalink, check representative desktop/mobile pages, search, math, tables, bookmarks, calculators and privacy, then publish that exact successful deploy. Preserve audience and production URL.
+Use a development branch and Netlify Deploy Preview/permalink, check representative desktop/mobile pages, search, math, tables, bookmarks, calculators and privacy, then release the completed main revision through the shared queue. Do not repeatedly publish production during development. Preserve audience and production URL. Emergency rollback through Netlify remains available; inspect any pending queue request before resuming publication.
 
 ## Failure and rollback
 

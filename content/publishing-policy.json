@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "minimumIntervalHours": 6,
+  "maxRequestsPer24Hours": 2,
+  "maxRequestsPer30Days": 12,
+  "estimatedCreditsPerProductionDeploy": 15,
+  "note": "Shared Living Codex request budget, including retries/manual queue requests. Rolling windows; not Netlify account billing or a guarantee of total usage. Other sites and serving traffic are separate."
+}

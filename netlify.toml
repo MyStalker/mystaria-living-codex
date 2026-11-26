@@ -1,5 +1,6 @@
 [build]
-  command = "python scripts/build.py"
+  command = "node scripts/production_guard.cjs --build-check && python scripts/build.py"
+  ignore = "node ./scripts/production_guard.cjs"
   publish = "dist"
 
 [build.environment]
